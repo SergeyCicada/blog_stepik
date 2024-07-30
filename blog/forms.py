@@ -11,10 +11,17 @@ class EmailPostForm(forms.Form):
 
 
 class CommentForm(forms.ModelForm):
+    name = forms.CharField(required=True,
+                           widget=forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Name'}))
+    email = forms.EmailField(required=True,
+                             widget=forms.EmailInput(attrs={"class": "form-control", 'placeholder': 'Email'}))
+    body = forms.CharField(required=True, widget=forms.Textarea(attrs={"class": "form-control", 'placeholder': 'Text'}))
+
     class Meta:
         model = Comment
         fields = ['name', 'email', 'body']
 
 
 class SearchForm(forms.Form):
-    query = forms.CharField()
+    query = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control mb-1", 'placeholder': 'Enter search term...'}))
